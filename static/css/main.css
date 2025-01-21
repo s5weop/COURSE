@@ -1,0 +1,35 @@
+img {
+    width: 100%;
+}
+
+body{
+    margin:0;
+    padding:0;
+}
+
+.body__content{
+    display: flex;
+    justify-content: center;
+}
+
+.header{
+    display:flex;
+    min-height: 3rem;
+    background: #6a6a6a;
+}
+
+.main__cont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem;
+    row-gap: 2rem;
+    column-gap: 2rem;
+    max-width: 65%
+}
+
+.img__cont{
+    border: 1px solid black;
+    width: 45%;
+}
