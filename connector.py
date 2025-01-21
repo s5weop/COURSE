@@ -76,6 +76,31 @@ def get_payment_details(payment_id):
     details = soup.select_one("div.article__info").text.strip()
     return details
 
+
 def get_payment_id_for_nomination(payment_name):
     cursor.execute("SELECT id_payment FROM payment WHERE nomination = %s", (payment_name,))
     return cursor.fetchone()
+
+
+def get_old():
+    cursor.execute("SELECT old FROM user")
+    return cursor.fetchall()
+
+
+def get_old_count_children():
+    cursor.execute("SELECT old, count_children FROM user")
+    return cursor.fetchall()
+
+
+def get_old_payment():
+    cursor.execute("SELECT old, payment_id_payment FROM user, user_has_payment")
+    return cursor.fetchall()
+
+
+def get_most_frequent_payment():
+    cursor.callproc('GetPaymentStatistics')
+    for result in cursor.stored_results():
+        rows = result.fetchall()
+    return rows
+
+
