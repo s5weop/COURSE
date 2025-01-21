@@ -14,10 +14,9 @@
     </header>
     <div class="body__content">
         <div class="main__cont">
-            <div class="img__cont"><img src="static/src/1.png"/></div>
-            <div class="img__cont"><img src="static/src/2.png"/></div>
-            <div class="img__cont"><img src="static/src/3.png"/></div>
-            <div class="img__cont"><img src="static/src/4.png"/></div>
+            {% for num in numbers %}
+                <div class="img__cont"><img src="static/src/{{num}}"/></div>
+            {% endfor %}
         </div>
     </div>
 </body>

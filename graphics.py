@@ -82,12 +82,19 @@ def plot_most_frequent_payments():
     # Сохранение графика
     plt.savefig(os.path.join(OUTPUT_DIR, '4.png'), bbox_inches='tight')
     plt.close()
-def main():
+
+
+def creatiDiagram():
     """Вызов всех функций для построения графиков."""
     plot_old()
     plot_old_vs_children()
     plot_old_vs_payment()
     plot_most_frequent_payments()
 
-if __name__ == '__main__':
-    main()
+    directory = "static/src/"
+    files = os.listdir(directory)
+
+    return files
+
+
+
