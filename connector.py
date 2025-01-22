@@ -95,9 +95,10 @@ def get_old_count_children():
 def get_old_payment():
     cursor.execute("SELECT old, payment_id_payment FROM user, user_has_payment")
     ages_and_payments = cursor.fetchall()
+    ages = [row[0] for row in ages_and_payments]
     count_payments = []
-    for age in set(ages_and_payments):
-        count = ages_and_payments.count(age)
+    for age in set(ages):
+        count = ages.count(age)
         count_payments.append((age, count))
     return count_payments
 

@@ -1,5 +1,6 @@
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Импортируем функции из другого файла
 from connector import get_old, get_old_count_children, get_old_payment, get_most_frequent_payment
@@ -48,38 +49,40 @@ def plot_old_vs_payment():
     ages = [row[0] for row in data]
     count = [row[1] for row in data]
 
-    plt.hist(count, bins=20, color='purple', alpha=0.7, edgecolor='black')
+    plt.hist(count, bins=25, color='purple', alpha=0.7, edgecolor='black')
     plt.title('Получение выплат в зависимости от возраста')
     plt.xlabel('Возраст')
     plt.ylabel('Количество выплат')
-    plt.xticks(ages)
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.savefig(os.path.join(OUTPUT_DIR, '3.png'))
     plt.close()
 
+#plot_old_vs_payment()
+
 def plot_most_frequent_payments():
     """Построить столбчатую диаграмму популярности социальных выплат."""
     frequent_payments_data = get_most_frequent_payment()
-    print(frequent_payments_data)
 
-    payment_names = [row[0] for row in frequent_payments_data]
+
+    payment_names = [row[0] if len(row[0]) <= 15 else row[0][:25] + '...' for row in frequent_payments_data]
     payment_counts = [row[1] for row in frequent_payments_data]
+    colors = np.random.rand(len(payment_counts), 3)  # Генерация случайных цветов
 
-    # Построение столбчатой диаграммы без подписей категорий на оси X
-    bars = plt.bar(range(len(payment_counts)), payment_counts, color='orange', alpha=0.7)
-
-    # Добавление легенды с названиями выплат
-    plt.legend(bars, payment_names, loc='center left', bbox_to_anchor=(1, 0.5))
+    # Построение столбчатой диаграммы
+    bars = plt.bar(range(len(payment_counts)), payment_counts, color=colors, alpha=0.7)
 
     # Настройка графика
     plt.title('Популярность социальных выплат')
     plt.xlabel('Выплаты')
     plt.ylabel('Количество пользователей')
-    plt.xticks([])  # Убираем подписи с оси X
-    plt.tight_layout()
+    plt.yticks(ticks=[a for a in range(max(payment_counts)+1)])
+    plt.xticks([])
     plt.grid(axis='y', linestyle='--', alpha=0.7)
 
+    # Добавление легенды внизу
+    plt.legend(bars, payment_names, loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=2)
     # Сохранение графика
+    plt.tight_layout()
     plt.savefig(os.path.join(OUTPUT_DIR, '4.png'), bbox_inches='tight')
     plt.close()
 
