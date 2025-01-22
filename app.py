@@ -9,6 +9,10 @@ app.config['SECRET_KEY'] = "very_SECRET_KEY"
 @app.route('/', methods=['POST', 'GET'])
 def index():
     files = creatiDiagram()
+
+    # directory = "static/src/"
+    # files = os.listdir(directory)
+
     return render_template('main.html', numbers = files)
 
 if __name__ == '__main__':
