@@ -94,7 +94,12 @@ def get_old_count_children():
 
 def get_old_payment():
     cursor.execute("SELECT old, payment_id_payment FROM user, user_has_payment")
-    return cursor.fetchall()
+    ages_and_payments = cursor.fetchall()
+    count_payments = []
+    for age in set(ages_and_payments):
+        count = ages_and_payments.count(age)
+        count_payments.append(count)
+    return count_payments
 
 
 def get_most_frequent_payment():
