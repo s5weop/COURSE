@@ -1,8 +1,8 @@
 import telebot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 from connector import is_registered, user_data, questions, save_user_to_db, get_payments, save_user_payment, get_payment_details, get_payment_id_for_nomination
+from TOKEN import TOKEN
 
-TOKEN = "7885646259:AAHMDzPhx3xLgj_YZHwVGHsPx262jtT2hLs"
 bot = telebot.TeleBot(TOKEN)
 
 
