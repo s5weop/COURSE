@@ -98,7 +98,7 @@ def get_old_payment():
     count_payments = []
     for age in set(ages_and_payments):
         count = ages_and_payments.count(age)
-        count_payments.append(count)
+        count_payments.append((age, count))
     return count_payments
 
 
