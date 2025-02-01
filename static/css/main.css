@@ -12,7 +12,7 @@ img {
 }
 
 body{
-    margin:0;
+    margin: 0;
     padding:0;
 }
 
@@ -26,6 +26,19 @@ body{
     min-height: 3rem;
     background: #6a6a6a;
     justify-content: flex-end;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+.time__update{
+    display: flex;
+    padding: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff; /* Цвет текста ссылки */
+    font-size: 16px; /* Размер шрифта */
 }
 
 .main__cont{
@@ -36,7 +49,8 @@ body{
     padding: 2rem;
     row-gap: 2rem;
     column-gap: 2rem;
-    max-width: 65%
+    max-width: 65%;
+    margin-top: 2rem;
 }
 
 .img__cont{
@@ -65,3 +79,4 @@ a {
     text-decoration: none;
 
 }
+
