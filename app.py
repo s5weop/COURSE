@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect, session, send_from_directory
-#from graphics import creatiDiagram
+from graphics import creatiDiagram
 
 import os
 
@@ -8,10 +8,10 @@ app.config['SECRET_KEY'] = "very_SECRET_KEY"
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    #files = creatiDiagram()
+    files = creatiDiagram()
 
-    directory = "static/src/"
-    files = os.listdir(directory)
+    # directory = "static/src/"
+    # files = os.listdir(directory)
 
     return render_template('main.html', numbers = files)
 

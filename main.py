@@ -1,9 +1,9 @@
 import telebot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 from connector import is_registered, user_data, questions, save_user_to_db, get_payments, save_user_payment, get_payment_details, get_payment_id_for_nomination
-from TOKEN import TOKEN
 
-bot = telebot.TeleBot(TOKEN)
+
+bot = telebot.TeleBot("7071800191:AAGIs28xt9bsQonvemOezuxjG0K1M9U9nGI")
 
 
 @bot.message_handler(commands=['start'])
@@ -56,6 +56,7 @@ def handle_registration(message):
         bot.send_message(user_id, "Регистрация завершена! Выберите социальную выплату, чтобы узнать подробности:")
         show_payments(message)
 
+#достаем выплаты из бд и выгружаем их на кнопки
 def show_payments(message):
     user_id = message.from_user.id
     payments = get_payments()
@@ -64,7 +65,8 @@ def show_payments(message):
         markup.add(KeyboardButton(nomination))
     bot.send_message(user_id, "Доступные социальные выплаты:", reply_markup=markup)
 
-def send_long_message(user_id, text):
+#для отправки длинного сообщения
+def send_long_message(user_id, text: str):
     # Разбить текст на части по 4000 символов
     max_length = 4000
     for i in range(0, len(text), max_length):
@@ -77,11 +79,14 @@ def handle_payment_selection(message):
     payment_name = message.text.strip()
     result = get_payment_id_for_nomination(payment_name)
     if result:
+
+        '''<Получение доп. информации о выплате>'''
         payment_id = result[0]
         save_user_payment(user_id, payment_id)
         details = get_payment_details(payment_id)
 
         send_long_message(user_id, f"Подробности о выплате:\n{details}")
+        '''<Получение доп. информации о выплате/>'''
 
         # Предложить варианты действий
         markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
