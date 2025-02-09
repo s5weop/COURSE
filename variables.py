@@ -36,3 +36,4 @@ class User:
         for key, value in kwargs.items():
             self.user_data[key] = value
 
+
